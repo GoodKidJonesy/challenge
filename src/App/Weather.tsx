@@ -1,47 +1,65 @@
-import React from "react"
+import React from "react";
+import { City, WeatherInfo } from "./types";
 
-const Weather = ( props: any ) => {
-    const [ info, setInfo ] = React.useState( {
-        city: null,
-        temp: null,
-        icon: null, } )
+const Weather = (props: { city?: string }) => {
+  const [info, setInfo] = React.useState<WeatherInfo>();
 
-    console.log( "info" + JSON.stringify( info ) )
+  const isPending = React.useRef(false);
 
-    const isPending = React.useRef( false )
+  const fetchCityCoordinatess = (city: string) => {
+    fetch(
+      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=4c4f0b1876954338598a7be96c66527b`
+    )
+      .then((res) => res.json())
+      .then((data: City[]) => {
+        fetchWeather(data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+        isPending.current = false;
+      });
+  };
 
-    React.useLayoutEffect( () => {
-        if ( props.city !== null || isPending.current === false ) {
+  const fetchWeather = (city: City) => {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&units=metric&appid=4c4f0b1876954338598a7be96c66527b`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setInfo({
+          city: data.name,
+          temp: data.main.temp,
+          icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        isPending.current = false;
+      });
+  };
 
-        isPending.current = true
+  const fetchCurrentWeather = (city: string) => {
+    isPending.current = true;
+    fetchCityCoordinatess(city);
+  };
 
-        fetch( `https://api.openweathermap.org/geo/1.0/direct?q=${ props.city }&appid=4c4f0b1876954338598a7be96c66527b` )
-            .then( res => res.json() )
-            .then( data => {
-                console.log( data )
+  React.useLayoutEffect(() => {
+    if (props.city && isPending.current === false) {
+      fetchCurrentWeather(props.city);
+    }
+  }, [props.city]);
 
-                fetch( `https://api.openweathermap.org/data/2.5/weather?lat=${ data[ 0 ].lat }&lon=${ data[ 0 ].lon }&units=metric&appid=4c4f0b1876954338598a7be96c66527b` )
-                    .then( res => res.json() )
-                    .then( data => {
-                        console.log( data )
-                        
-                        setInfo( {
-                            city: data.name,
-                            temp: data.main.temp,
-                            icon: `https://openweathermap.org/img/wn/${ data.weather[ 0 ].icon }@2x.png` as any, } ) 
-                        
-                        isPending.current = false } ) } ) } }, [ props.city ] )
+  return info ? (
+    <>
+      <h1>{info.city}</h1>
 
-    return  <>
-                <h1>
-                    { info.city }
-                </h1>
+      <p>{~~info.temp} Celcius</p>
 
-                <p>
-                    { info.temp && ~~ info.temp } Celcius
-                </p>
+      <img src={info.icon} alt="Icon" />
+    </>
+  ) : null;
+};
 
-                <img src={ info.icon as unknown as string } alt="Icon" />
-            </> }
-
-export { Weather }
+export { Weather };
