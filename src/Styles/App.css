@@ -1,0 +1,192 @@
+:root {
+  font-size: 10px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --dark: #1f1f1f;
+  --light: #f1f1f1;
+  --teal: #1fb8b8;
+  --ruby: #950e45;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 1.5rem;
+  text-transform: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.App,
+.container,
+#root {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.container,
+.card {
+  background-color: var(--dark);
+}
+#light .container,
+#light .card {
+  background-color: var(--light);
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 4rem;
+  right: 4rem;
+  cursor: pointer;
+  font-size: 2rem;
+  color: var(--light);
+  background-color: var(--dark);
+  border: 2px solid var(--light);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+#light .theme-toggle {
+  color: var(--dark);
+  background-color: var(--light);
+  border: 2px solid var(--dark);
+}
+
+.card {
+  border: 2px solid var(--ruby);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 70vh;
+  aspect-ratio: 3 / 5;
+}
+
+.city-input,
+.show-weather-button {
+  height: 5rem;
+  border-radius: 1rem;
+  width: 100%;
+  flex-shrink: 0;
+}
+.city-input {
+  background-color: var(--dark);
+  color: var(--light);
+  border: 2px solid var(--light);
+  outline: none;
+}
+#light .city-input {
+  background-color: var(--light);
+  color: var(--dark);
+  border: 2px solid var(--dark);
+}
+.city-input:focus {
+  border-color: var(--teal);
+}
+
+.show-weather-button {
+  margin-top: auto;
+  cursor: pointer;
+  border: 2px solid var(--teal);
+  background-color: var(--dark);
+  color: var(--teal);
+  float: right;
+
+  transition: transform 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    color 0.15s ease-in-out;
+}
+
+#light .show-weather-button {
+  background-color: var(--light);
+}
+
+.show-weather-button:hover,
+.show-weather-button:focus {
+  background-color: var(--light);
+  color: var(--dark);
+  border-color: var(--light);
+  transform: scale(1.05);
+}
+
+#light .show-weather-button:hover,
+#light .show-weather-button:focus {
+  background-color: var(--dark);
+  color: var(--light);
+  border-color: var(--dark);
+}
+
+.weather-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 100%;
+  height: 100%;
+}
+
+.city-input {
+  padding-inline: 2rem;
+}
+
+.weather-icon {
+  justify-self: center;
+  height: 18rem;
+}
+
+.temperature {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  color: var(--teal);
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
+
+.feels-like {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  color: var(--teal);
+  text-underline-offset: 0.5rem;
+}
+
+.city-name {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--teal);
+}
+
+@media (min-width: 768px) {
+  .card {
+    min-width: 70vw;
+    min-height: auto;
+    aspect-ratio: 5 / 3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    min-width: 50vw;
+    min-height: auto;
+    aspect-ratio: 5 / 3;
+  }
+  .city-name {
+    font-size: 4rem;
+  }
+  .temperature {
+    font-size: 3rem;
+  }
+}

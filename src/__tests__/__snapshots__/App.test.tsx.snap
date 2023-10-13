@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Renders Component According To Snapshot 1`] = `
+<div>
+  <div
+    class="App"
+    id="dark"
+  >
+    <div
+      class="container"
+    >
+      <button
+        class="theme-toggle"
+      >
+        Toggle Theme
+      </button>
+      <div
+        class="card"
+      >
+        <input
+          class="city-input"
+          placeholder="Enter a city"
+          role="search"
+          type="text"
+          value=""
+        />
+        <button
+          class="show-weather-button"
+        >
+          Show Weather
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
