@@ -127,11 +127,19 @@ body {
 
 .weather-container {
   display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  gap: 2rem;
+}
+
+.info-container {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 2rem;
-  width: 100%;
   height: 100%;
 }
 
@@ -148,6 +156,7 @@ body {
   color: var(--teal);
   text-decoration: underline;
   text-underline-offset: 0.5rem;
+  text-align: center;
 }
 
 .feels-like {
@@ -160,7 +169,7 @@ body {
 }
 
 .city-name {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--teal);
@@ -168,7 +177,7 @@ body {
 
 @media (min-width: 768px) {
   .card {
-    min-width: 70vw;
+    min-width: 80vw;
     min-height: auto;
     aspect-ratio: 5 / 3;
   }
@@ -176,14 +185,8 @@ body {
 
 @media (min-width: 1024px) {
   .card {
-    min-width: 50vw;
+    min-width: 60vw;
     min-height: auto;
     aspect-ratio: 5 / 3;
-  }
-  .city-name {
-    font-size: 4rem;
-  }
-  .temperature {
-    font-size: 3rem;
   }
 }

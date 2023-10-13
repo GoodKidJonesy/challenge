@@ -16,7 +16,7 @@ const App = () => {
       setTheme("light");
     }
   };
-  const doStuff = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const updateInputValue = (event: React.ChangeEvent<HTMLInputElement>) =>
     setInput(event.target.value);
 
   return (
@@ -32,7 +32,7 @@ const App = () => {
             type="text"
             placeholder="Enter a city"
             value={input}
-            onChange={doStuff}
+            onChange={updateInputValue}
           />
 
           <Weather city={city} />

@@ -4,15 +4,15 @@ import { fetchCurrentWeather } from "../Utilities/apiUtils";
 import "../Styles/App.css";
 
 const Weather = (props: { city?: string }) => {
-  const [info, setInfo] = useState<WeatherInfo>();
-  const [isCelsius, setIsCelsius] = useState(true); // Track the temperature unit
+  const [info, setInfo] = useState<WeatherInfo | null>(null);
+  const [isCelsius, setIsCelsius] = useState(true);
 
   const isPending = useRef(false);
 
   const updateWeather = async (city: string) => {
     isPending.current = true;
     const weather = await fetchCurrentWeather(city);
-    setInfo(weather || undefined);
+    setInfo(weather || null);
     isPending.current = false;
   };
 
@@ -37,15 +37,17 @@ const Weather = (props: { city?: string }) => {
 
   return info ? (
     <div className="weather-container">
-      <h1 className="city-name">{info.city + ", " + info.country}</h1>
-      <img className="weather-icon" src={info.icon} alt="Icon" />
-      <p className="temperature" onClick={toggleTemperatureUnit}>
-        {getFahrenheit(info.temp)}
-      </p>
-      <p
-        className="feels-like"
-        onClick={toggleTemperatureUnit}
-      >{`( Feels Like: ${getFahrenheit(info.feelsLike)} )`}</p>
+      <div className="info-container">
+        <h1 className="city-name">{info.city + ", " + info.country}</h1>
+        <img className="weather-icon" src={info.icon} alt="Icon" />
+        <p className="temperature" onClick={toggleTemperatureUnit}>
+          {getFahrenheit(info.temp)}
+        </p>
+        <p
+          className="feels-like"
+          onClick={toggleTemperatureUnit}
+        >{`( Feels Like: ${getFahrenheit(info.feelsLike)} )`}</p>
+      </div>
     </div>
   ) : null;
 };
