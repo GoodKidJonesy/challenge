@@ -1,13 +1,16 @@
 import React from "react";
-
 import { Weather } from "./Components/Weather";
-
 import "./Styles/App.css";
 
 const App = () => {
   const [theme, setTheme] = React.useState("dark");
   const [input, setInput] = React.useState("");
   const [city, setCity] = React.useState("");
+
+  const buttonLabels = {
+    toggleTheme: "Toggle Theme",
+    showWeather: "Show Weather",
+  };
 
   const toggleTheme = () => {
     if (theme === "light") {
@@ -23,7 +26,7 @@ const App = () => {
     <div className="App" id={theme}>
       <div className="container">
         <button className="theme-toggle" onClick={toggleTheme}>
-          Toggle Theme
+          {buttonLabels.toggleTheme}
         </button>
         <div className="card">
           <input
@@ -41,7 +44,7 @@ const App = () => {
             className="show-weather-button"
             onClick={() => setCity(input)}
           >
-            Show Weather
+            {buttonLabels.showWeather}
           </button>
         </div>
       </div>
