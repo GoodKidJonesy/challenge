@@ -26,10 +26,6 @@ const fetchWeather = (city: City) => {
         temp: data.main.temp,
         feelsLike: data.main.feels_like,
         icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`,
-        wind: {
-          deg: data.wind.deg,
-          speed: data.wind.speed,
-        },
       } as WeatherInfo;
     })
     .catch(() => {

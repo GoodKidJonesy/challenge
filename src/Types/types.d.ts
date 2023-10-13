@@ -12,8 +12,4 @@ export type WeatherInfo = {
   temp: number;
   feelsLike: number;
   icon: string;
-  wind: {
-    deg: number;
-    speed: number;
-  };
 };
